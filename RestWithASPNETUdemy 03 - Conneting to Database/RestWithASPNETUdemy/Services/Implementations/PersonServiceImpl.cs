@@ -1,17 +1,34 @@
 ﻿using RestWithASPNETUdemy.Model;
-using RestWithASPNETUdemy.Services.Implementations;
+using RestWithASPNETUdemy.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace RestWithASPNETUdemy.Services
+namespace RestWithASPNETUdemy.Services.Implementations
 {
     public class PersonServiceImpl : IPersonService
     {
+        private readonly MySQLContext _context;
+
+        public PersonServiceImpl(MySQLContext context)
+        {
+            _context = context;
+        }
+
         private volatile int count;
 
         public Person Create(Person person)
         {
+            try
+            {
+                _context.Add(person);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
             return person;
         }
 
@@ -39,7 +56,7 @@ namespace RestWithASPNETUdemy.Services
                 FirstName = $"Person Name {i}",
                 LastName = $"Person Lastname {i}",
                 Address = $"Some Address {i}",
-                Genger = "Male"
+                Gender = "Male"
             };
         }
 
@@ -51,7 +68,7 @@ namespace RestWithASPNETUdemy.Services
                 FirstName = "Alexandre",
                 LastName = "Gonçalves",
                 Address = "Porto",
-                Genger = "Masculino"
+                Gender = "Masculino"
             };
         }
 

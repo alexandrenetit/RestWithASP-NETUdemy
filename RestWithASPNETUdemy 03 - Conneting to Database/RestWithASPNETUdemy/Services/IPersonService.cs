@@ -1,7 +1,7 @@
 ﻿using RestWithASPNETUdemy.Model;
 using System.Collections.Generic;
 
-namespace RestWithASPNETUdemy.Services.Implementations
+namespace RestWithASPNETUdemy.Services
 {
     public interface IPersonService
     {
