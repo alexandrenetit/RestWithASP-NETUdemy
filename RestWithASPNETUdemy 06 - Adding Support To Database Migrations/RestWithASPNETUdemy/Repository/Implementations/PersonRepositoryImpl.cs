@@ -60,21 +60,23 @@ namespace RestWithASPNETUdemy.Repository.Implementations
         
         public Person Update(Person person)
         {
-            if (!Exists(person.Id)) return new Person();
+            if (!Exists(person.Id)) return null;
 
             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
-
-            try
+            if (result != null)
             {
-                _context.Entry(result).CurrentValues.SetValues(person);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(person);
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                } 
             }
 
-            return person;
+            return result;
         }
 
         public bool Exists(long? id)
