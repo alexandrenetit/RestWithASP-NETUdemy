@@ -13,6 +13,8 @@ using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Business.Implementations;
 using RestWithASPNETUdemy.Repository;
 using RestWithASPNETUdemy.Repository.Implementations;
+using RestWithASPNETUdemy.Repository.Generic;
+using RestWithASPNETUdemy.Business.Implementattions;
 
 namespace RestWithASPNETUdemy
 {
@@ -64,7 +66,12 @@ namespace RestWithASPNETUdemy
 
             //Dependency Injection
             services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
+            services.AddScoped<IBookBusiness, BookBusinessImpl>();
+
             services.AddScoped<IPersonRepository, PersonRepositoryImpl>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -41,7 +41,7 @@ namespace RestWithASPNETUdemy.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public ActionResult Put([FromBody] Person person)
         {
             if (person == null)
